@@ -2,11 +2,8 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
-  JoinColumn
 } from "typeorm";
 
-import { Usuario } from "./usuario";
 export type Tipo = "cliente" | "fornecedor";
 
 @Entity("cliente_ou_fornecedor")
@@ -38,8 +35,4 @@ export class ClienteOuFornecedor {
 
   @Column({ default: true })
   status: boolean;
-
-  @ManyToOne(() => Usuario)
-  @JoinColumn({ name: "usuario_id" })
-  usuario: Usuario;
 }
