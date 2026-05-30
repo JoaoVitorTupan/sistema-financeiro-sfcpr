@@ -50,17 +50,17 @@ h2 {
   font-size: 14px;
 }
 
-/* PASSWORD */
+/* SENHA */
 
-.password-container {
+.senha-container {
   position: relative;
 }
 
-.password-container input {
+.senha-container input {
   padding-right: 40px;
 }
 
-.password-container img {
+.senha-container img {
   position: absolute;
   right: 12px;
   top: 50%;
@@ -71,7 +71,7 @@ h2 {
   transition: 0.2s;
 }
 
-.password-container img:hover {
+.senha-container img:hover {
   opacity: 1;
 }
 
@@ -114,17 +114,17 @@ h2 {
   font-size: 13px;
 }
 
-.forgot-password {
+.redefinirSenha {
   text-align: right;
   font-size: 13px;
 }
 
-.forgot-password a {
+.redefinirSenha a {
   color: #007bff;
   text-decoration: none;
 }
 
-.forgot-password a:hover {
+.redefinirSenha a:hover {
   text-decoration: underline;
 }
 
@@ -149,8 +149,8 @@ h2 {
 
 /* ÍCONES */
 
-.menu-icon,
-.user-icon {
+.menu-Icone,
+.Usuario-Icone {
   width: 38px;
   height: 38px;
   cursor: pointer;
@@ -161,8 +161,8 @@ h2 {
   transition: 0.2s;
 }
 
-.menu-icon:hover,
-.user-icon:hover {
+.menu-Icone:hover,
+.Usuario-Icone:hover {
   transform: scale(1.1);
 }
 
@@ -265,16 +265,16 @@ h2 {
   background-color: #f9fafc;
 }
 
-/* SEARCH */
+/* BUSCA */
 
-.dvSearch {
+.dvBusca {
   display: flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 25px;
 }
 
-.dvSearch input {
+.dvBusca input {
   flex: 1;
 }
 

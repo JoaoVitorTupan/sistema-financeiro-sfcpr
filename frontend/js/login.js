@@ -1,46 +1,76 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   window.login = async function () {
+
     const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const senha = document.getElementById("senha").value;
     const error = document.getElementById("error");
 
     error.innerText = "";
 
     try {
-      const response = await fetch("http://localhost:3000/login", {
+
+      const response = await fetch("http://localhost:3000/usuarios/login", {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ email, password })
+
+        body: JSON.stringify({
+          email,
+          senha
+        })
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        error.innerText = data.message || "Erro ao fazer login";
+
+        error.innerText =
+          data.error || "Erro ao fazer login";
+
         return;
       }
-      localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", data.token);
+
+      localStorage.setItem(
+        "usuario",
+        JSON.stringify(data.usuario)
+      );
+
+      localStorage.setItem(
+        "token",
+        data.token
+      );
 
       window.location.href = "financeiro.html";
 
     } catch (err) {
-      error.innerText = "Erro de conexão com a API";
+
+      error.innerText =
+        "Erro de conexão com a API";
     }
   };
 
-  const togglePassword = document.getElementById("togglePassword");
-  const passwordInput = document.getElementById("password");
+  const mostrarSenha =
+    document.getElementById("mostrarSenha");
 
-  if (togglePassword && passwordInput) {
-    togglePassword.addEventListener("click", () => {
-      const isPassword = passwordInput.type === "password";
+  const senhaInput =
+    document.getElementById("senha");
 
-      passwordInput.type = isPassword ? "text" : "password";
-      togglePassword.src = isPassword ? "../assets/eye.png" : "../assets/eye-off.png";
+  if (mostrarSenha && senhaInput) {
+
+    mostrarSenha.addEventListener("click", () => {
+
+      const isSenha =
+        senhaInput.type === "password";
+
+      senhaInput.type =
+        isSenha ? "text" : "password";
+
+      mostrarSenha.src = isSenha
+        ? "../assets/olho.png"
+        : "../assets/olho-off.png";
     });
   }
 

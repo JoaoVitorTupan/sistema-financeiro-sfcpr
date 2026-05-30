@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function carregarPerfil() {
     try {
-      const response = await fetch("http://localhost:3000/profile", {
+      const response = await fetch("http://localhost:3000/usuarios/perfil", {
         headers: {
-          "Authorization": `Bearer ${token}`
+          "Autorizado": `Bearer ${token}`
         }
       });
 
@@ -18,21 +18,21 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("Erro ao buscar perfil");
       }
 
-      const user = await response.json();
+      const usuario = await response.json();
       const nome = document.getElementById("nomeUsuario");
       const email = document.getElementById("emailUsuario");
       const role = document.getElementById("roleUsuario");
 
-      if (nome) nome.innerText = user.name;
-      if (email) email.innerText = user.email;
+      if (nome) nome.innerText = usuario.nome;
+      if (email) email.innerText = usuario.email;
 
       let roleText = "Usuário";
 
-      if (user.role === "administrador") {
+      if (usuario.role === "administrador") {
         roleText = "Administrador";
-      } else if (user.role === "gestor") {
+      } else if (usuario.role === "gestor") {
         roleText = "Gestor";
-      } else if (user.role === "financeiro") {
+      } else if (usuario.role === "financeiro") {
         roleText = "Financeiro";
       }
 
@@ -46,12 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  const logoutLink = document.getElementById("logoutLink");
+  const sairLink = document.getElementById("sairLink");
 
-  if (logoutLink) {
-    logoutLink.addEventListener("click", (e) => {
+  if (sairLink) {
+    sairLink.addEventListener("click", (e) => {
       e.preventDefault();
-      localStorage.removeItem("user");
+      localStorage.removeItem("usuario");
       localStorage.removeItem("token");
       window.location.href = "login.html";
     });

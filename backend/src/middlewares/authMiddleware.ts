@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { BadRequestError, UnauthorizedError } from "../utils/api-erros";
-import { userRepository } from "../repositories/userRepository";
+import { usuarioRepository } from "../repositories/usuarioRepository";
 import jwt from 'jsonwebtoken'
 
 type JwtPayload = {
@@ -8,25 +8,25 @@ type JwtPayload = {
 }
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-    const { authorization } = req.headers
+    const { autorizado } = req.headers
 
-    if (!authorization) {
+    if (!autorizado || typeof autorizado !== "string") {
         throw new UnauthorizedError('Nao autorizado')
     }
 
-    const token = authorization.split(' ')[1]
+    const token = autorizado.split(' ')[1]
 
     const {id} = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload
 
-    const user = await userRepository.findOneBy({ id })
+    const usuario = await usuarioRepository.findOneBy({ id })
 
-    if (!user) {
+    if (!usuario) {
         throw new BadRequestError('E-mail ou senha invalidos')
     }
 
-    const { password: _, ...loggedUser } = user
+    const { senha: _, ...usuarioLogado } = usuario
 
-    req.user = loggedUser
+    req.usuario = usuarioLogado
 
     next()
 }

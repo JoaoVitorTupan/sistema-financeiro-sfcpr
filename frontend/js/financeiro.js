@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const welcome = document.querySelector("h1");
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const bemVindo = document.querySelector("h1");
   const btnMenu = document.getElementById("btnMenu");
   const menuDropdown = document.getElementById("menuDropdown");
-  const btnProfile = document.getElementById("btnProfile");
-  const logout = document.getElementById("logout");
+  const btnPerfil = document.getElementById("btnPerfil");
+  const sair = document.getElementById("sair");
 
-  if (!user) {
+  if (!usuario) {
     window.location.href = "login.html";
     return;
   }
@@ -17,22 +17,22 @@ document.addEventListener("DOMContentLoaded", () => {
        menuDropdown.style.display === "flex" ? "none" : "flex";
   });
 
-  btnProfile.addEventListener("click", () => {
-    window.location.href = "profile.html";
+  btnPerfil.addEventListener("click", () => {
+    window.location.href = "perfil.html";
   });
 
 
-  if (user.role !== "administrador") {
-    const manageUsersLink = document.querySelector('a[href="manageUsers.html"]');
-    if (manageUsersLink) {
-      manageUsersLink.style.display = "none";
+  if (usuario.role !== "administrador") {
+    const gerenciarUsuariosLink = document.querySelector('a[href="gerenciarUsuarios.html"]');
+    if (gerenciarUsuariosLink) {
+      gerenciarUsuariosLink.style.display = "none";
     }
   }
 
-  logout.addEventListener("click", (e) => {
+  sair.addEventListener("click", (e) => {
     e.preventDefault();
 
-    localStorage.removeItem("user");
+    localStorage.removeItem("usuario");
     localStorage.removeItem("token");
 
     window.location.href = "login.html";
