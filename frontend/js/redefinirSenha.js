@@ -1,13 +1,13 @@
 const newSenhaInput = document.getElementById("newSenha");
-const mostrarSenha = document.getElementById("mostrarSenha");
+const mostrarNewSenha = document.getElementById("mostrarNewSenha");
 
-mostrarSenha.addEventListener("click", () => {
-  if (newSenhaInput.type === "senha") {
+mostrarNewSenha.addEventListener("click", () => {
+  if (newSenhaInput.type === "password") {
     newSenhaInput.type = "text";
-    mostrarSenha.src = "../assets/olho.png";
+    mostrarNewSenha.src = "../assets/olho.png";
   } else {
-    newSenhaInput.type = "senha";
-    mostrarSenha.src = "../assets/olho-off.png";
+    newSenhaInput.type = "password";
+    mostrarNewSenha.src = "../assets/olho-off.png";
   }
 });
 
@@ -15,11 +15,11 @@ const confirmSenhaInput = document.getElementById("confirmSenha");
 const mostrarConfirmSenha = document.getElementById("mostrarConfirmSenha");
 
 mostrarConfirmSenha.addEventListener("click", () => {
-  if (confirmSenhaInput.type === "senha") {
+  if (confirmSenhaInput.type === "password") {
     confirmSenhaInput.type = "text";
     mostrarConfirmSenha.src = "../assets/olho.png";
   } else {
-    confirmSenhaInput.type = "senha";
+    confirmSenhaInput.type = "password";
     mostrarConfirmSenha.src = "../assets/olho-off.png";
   }
 });
@@ -48,7 +48,7 @@ async function redefinirSenha() {
     return;
   }
   try {
-    const response = await fetch("http://localhost:3000/redefinir-senha", {
+    const response = await fetch("http://localhost:3000/usuarios/redefinir-senha", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -70,7 +70,7 @@ async function redefinirSenha() {
     alert("Senha redefinida com sucesso!");
     window.location.href = "login.html";
 
-  } catch (erro) {
+  } catch (error) {
     error.innerText = "Erro de conexão com a API";
   }
 }

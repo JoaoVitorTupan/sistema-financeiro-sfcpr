@@ -1,12 +1,44 @@
 document.addEventListener("DOMContentLoaded", () => {
     const api = "http://localhost:3000/clientes-fornecedores";
-
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
     const token = localStorage.getItem("token");
+    const btnAdicionar = document.getElementById("btnAdicionar");
+    const btnCancelar = document.getElementById("btnCancelar");
+    const btnSalvar = document.getElementById("btnSalvar");
+    const btnBuscar = document.getElementById("btnBuscar");
+    const btnMenu = document.getElementById("btnMenu");
+    const btnPerfil = document.getElementById("btnPerfil");
+    const menuDropdown = document.getElementById("menuDropdown");
+    const sair = document.getElementById("sair");
 
     if (!token) {
         window.location.href = "login.html";
         return;
     }
+
+        btnPerfil?.addEventListener("click", () => {
+        window.location.href = "perfil.html";
+    });
+
+    btnMenu?.addEventListener("click", () => {
+        menuDropdown.style.display =
+            menuDropdown.style.display === "flex"
+                ? "none"
+                : "flex";
+    });
+
+    if (usuario.role !== "administrador") {
+        const gerenciarUsuariosLink = document.querySelector('a[href="gerenciarUsuarios.html"]');
+        if (gerenciarUsuariosLink) {
+        gerenciarUsuariosLink.style.display = "none";
+        }
+    }
+
+    sair?.addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+    });
 
     let listaRegistros = [];
     let registroEditando = null;
@@ -63,6 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${registro.nome}</td>
                     <td>${registro.cpf_cnpj}</td>
                     <td>${registro.email ?? ""}</td>
+                    <td>${registro.telefone ?? ""}</td>
+                    <td>${registro.endereco ?? ""}</td>
                     <td>${registro.status ? "Ativo" : "Inativo"}</td>
                     <td>
                         <button
@@ -247,15 +281,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.editarRegistro = editarRegistro;
     window.alterarStatus = alterarStatus;
 
-    const btnAdicionar = document.getElementById("btnAdicionar");
-    const btnCancelar = document.getElementById("btnCancelar");
-    const btnSalvar = document.getElementById("btnSalvar");
-    const btnBuscar = document.getElementById("btnBuscar");
-    const btnMenu = document.getElementById("btnMenu");
-    const btnPerfil = document.getElementById("btnPerfil");
-    const menuDropdown = document.getElementById("menuDropdown");
-    const logout = document.getElementById("logout");
-
     btnAdicionar?.addEventListener("click", () => {
         limparFormulario();
         abrirModal();
@@ -264,23 +289,6 @@ document.addEventListener("DOMContentLoaded", () => {
     btnCancelar?.addEventListener("click", fecharModal);
     btnSalvar?.addEventListener("click", salvarRegistro);
     btnBuscar?.addEventListener("click", buscarRegistro);
-
-    btnPerfil?.addEventListener("click", () => {
-        window.location.href = "perfil.html";
-    });
-
-    btnMenu?.addEventListener("click", () => {
-        menuDropdown.style.display =
-            menuDropdown.style.display === "flex"
-                ? "none"
-                : "flex";
-    });
-
-    logout?.addEventListener("click", (e) => {
-        e.preventDefault();
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
-    });
 
     carregarRegistros();
 });

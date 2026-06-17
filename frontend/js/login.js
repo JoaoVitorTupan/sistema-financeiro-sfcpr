@@ -52,11 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const mostrarSenha =
-    document.getElementById("mostrarSenha");
+  const mostrarSenha = document.getElementById("mostrarSenha");
 
-  const senhaInput =
-    document.getElementById("senha");
+  const senhaInput = document.getElementById("senha");
 
   if (mostrarSenha && senhaInput) {
 
@@ -73,5 +71,4 @@ document.addEventListener("DOMContentLoaded", () => {
         : "../assets/olho-off.png";
     });
   }
-
 });
